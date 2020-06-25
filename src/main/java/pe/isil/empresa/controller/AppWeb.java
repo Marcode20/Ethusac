@@ -65,7 +65,7 @@ public class AppWeb {
     @RequestMapping("/para")
     public String paradero(Model model){
         model.addAttribute("para");
-        return "Paradero";
+        return "paradero";
     }
 
     @RequestMapping("/cont")

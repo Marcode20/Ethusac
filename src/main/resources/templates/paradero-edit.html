@@ -7,21 +7,18 @@
 <body>
 
 <form action="#" method="post"
-      th:object="${chofer}"
-      th:action="@{/chofer/update/{id} (id = ${chofer.chofer_id})}">
+      th:object="${paradero} "
+      th:action="@{/paradero/update/{id} (id = ${paradero.paradero_id})}">
 
     <table>
+
         <tr>
-            <td>chofer_id:</td>
-            <td><input type="text" th:field="*{chofer_id}"></td>
+            <td>nombre:</td>
+            <td><input type="text" th:field="*{nombreParadero}"></td>
         </tr>
         <tr>
-            <td>nombres:</td>
-            <td><input type="text" th:field="*{nombres}"></td>
-        </tr>
-        <tr>
-            <td>apellidos:</td>
-            <td><input type="text" th:field="*{apellidos}"></td>
+            <td>capacidad:</td>
+            <td><input type="number" th:field="*{capacidadMotos}"></td>
         </tr>
         <tr>
             <td>direccion:</td>
@@ -29,12 +26,8 @@
         </tr>
 
         <tr>
-            <td>fec_ingreso:</td>
-            <td><input type="date" th:field="*{fec_ingreso}"></td>
-        </tr>
-        <tr>
-            <td>telefono:</td>
-            <td><input type="number" th:field="*{telefono}"></td>
+            <td>distrito:</td>
+            <td><input type="text" th:field="*{distrito}"></td>
         </tr>
         <tr class="pt-2">
             <td>

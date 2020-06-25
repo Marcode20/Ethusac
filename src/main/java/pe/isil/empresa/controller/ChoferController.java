@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import pe.isil.empresa.model.Chofer;
 import pe.isil.empresa.model.Moto;
 import pe.isil.empresa.service.ChoferService;
+import pe.isil.empresa.service.ChoferServiceImpl;
 import pe.isil.empresa.service.MotoService;
 
 import java.util.HashSet;
@@ -19,51 +20,53 @@ public class ChoferController {
 
     //chofer
     @Autowired
-    private ChoferService choferService;
+    private ChoferServiceImpl choferServiceImpl;
 
     @Autowired
     private MotoService motoService;
 
-    @GetMapping("/chofers")
+    @GetMapping("/chofer")
     public String getAllChofer(Model model){
-        model.addAttribute("chofer", choferService.getAllChofer());
-        return "choferes";
+        model.addAttribute("chofer", choferServiceImpl.getAllChofer());
+        model.addAttribute("chofer1", new Chofer());
+        return "chofer";
     }
-    @GetMapping("/chofers/add")
+    @GetMapping("/chofer/add")
     public String loanAdd(Model model){
-        model.addAttribute("chofersa", new Chofer());
+        model.addAttribute("chofer", new Chofer());
         return "chofer-add";
     }
     @PostMapping("/chofer/save")
     public String choferSave(Chofer chofer){
-        choferService.createChofer(chofer);
-        return "redirect:/chofers";
+        choferServiceImpl.createChofer(chofer);
+        return "redirect:/chofer";
     }
     @GetMapping("/chofer/edit/{id}")
     public String EditChofer(@PathVariable Integer id,Model model){
-        Chofer currentChofer = choferService.getChoferById(id);
-        model.addAttribute("chofer1",currentChofer);
+        Chofer currentChofer = choferServiceImpl.getChoferById(id);
+        model.addAttribute("chofer",currentChofer);
         return "chofer-edit";
     }
 
     @PostMapping("/chofer/update/{id}")
     public String updatechofer(@PathVariable Integer id, Chofer chofer){
-        choferService.updateChofer(chofer);
-        return "redirect:/chofers";
+        choferServiceImpl.updateChofer(chofer);
+        return "redirect:/chofer";
     }
     @GetMapping("chofer/delete/{id}")
     public String deletechofer(@PathVariable Integer id){
-        this.choferService.deleteChofer(id);
-        return "redirect:/chofers";
+        this.choferServiceImpl.deleteChofer(id);
+        return "redirect:/chofer";
     }
 
     //chofer + Moto
     @GetMapping("/chofer/{id}/motos")
     public String motoList(Model model, @PathVariable Integer id){
         model.addAttribute("id",id);
-        Chofer current = choferService.getChoferById(id);
+        Chofer current = choferServiceImpl.getChoferById(id);
         model.addAttribute("motos",motoService.getMotoByIdChofer(current));
         model.addAttribute("motolist",motoService.getAllMoto());
+        model.addAttribute("moto",new Moto());
         return "motos";
     }
 
@@ -77,7 +80,7 @@ public class ChoferController {
 
     @PostMapping("/chofer/{id}/motos/save")
     public String motosave(Moto moto, @PathVariable Integer id){
-        Chofer currentChofer = choferService.getChoferById(id);
+        Chofer currentChofer = choferServiceImpl.getChoferById(id);
         Set<Chofer> listchofer = new HashSet<>();
         listchofer.add(currentChofer);
         if(currentChofer != null){
@@ -86,6 +89,10 @@ public class ChoferController {
         }
         return "redirect:/chofer/"+id+"/motos";
     }
+
+
+
+
 
 //    @GetMapping("/chofers/{id}")
 //    public ResponseEntity<Chofer> getByIdChofer(@PathVariable Integer id){

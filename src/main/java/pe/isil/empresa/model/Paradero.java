@@ -21,6 +21,15 @@ public class Paradero {
     @Column
     private String nombreParadero;
 
+    @Column
+    private Integer capacidadMotos;
+
+    @Column
+    private String direccion;
+
+    @Column
+    private String distrito;
+
 
     @OneToMany(mappedBy = "paradero")
     private Set<Moto> moto;
