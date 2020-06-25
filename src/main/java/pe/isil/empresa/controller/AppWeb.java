@@ -73,6 +73,16 @@ public class AppWeb {
         model.addAttribute("cont");
         return "contactanos";
     }
+    @RequestMapping("/consult")
+    public String consultas(Model model){
+        model.addAttribute("consult");
+        return "consultas";
+    }
+    @RequestMapping("/menuadmins")
+    public String menuadmin(Model model){
+        model.addAttribute("menuadmins");
+        return "menuadmin";
+    }
     @RequestMapping("/mans")
     public String menPrincipal(Model model){
         model.addAttribute("mans");
