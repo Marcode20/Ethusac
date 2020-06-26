@@ -19,7 +19,7 @@ public class Chofer {
 
     @Id
     @GeneratedValue(
-            strategy = GenerationType.AUTO
+            strategy = GenerationType.IDENTITY
     )
     private Integer chofer_id;
     @Column

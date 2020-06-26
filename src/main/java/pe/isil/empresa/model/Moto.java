@@ -15,7 +15,7 @@ import java.util.Set;
 public class Moto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer moto_id;
     @Column
     private String placa;
