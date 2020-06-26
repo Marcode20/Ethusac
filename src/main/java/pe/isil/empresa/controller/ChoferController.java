@@ -51,6 +51,7 @@ public class ChoferController {
 
     @PostMapping("/chofer/update/{id}")
     public String updatechofer(@PathVariable Integer id, Chofer chofer){
+        chofer.setChofer_id(id);
         choferServiceImpl.updateChofer(chofer);
         return "redirect:/chofer";
     }
