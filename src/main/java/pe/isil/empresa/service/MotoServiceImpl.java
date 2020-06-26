@@ -5,8 +5,10 @@ import org.springframework.stereotype.Service;
 import pe.isil.empresa.exception.ResourceNotFoundException;
 import pe.isil.empresa.model.Chofer;
 import pe.isil.empresa.model.Moto;
+import pe.isil.empresa.model.Paradero;
 import pe.isil.empresa.repository.ChoferRepository;
 import pe.isil.empresa.repository.MotoRepository;
+import pe.isil.empresa.repository.ParaderoRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -22,6 +24,9 @@ public class MotoServiceImpl implements MotoService {
 
     @Autowired
     private ChoferRepository choferRepository;
+
+    @Autowired
+    private ParaderoRepository paraderoRepository;
 
     @Override
     public Moto createMoto(Moto moto) {
@@ -77,6 +82,16 @@ public class MotoServiceImpl implements MotoService {
         List<Moto> motoList = motoRepository.findAll();
         Moto moto = motoList.stream().filter(a -> a.getChofer().equals(chofer1)).findFirst().orElse(null);
         List<Moto> motoList1 =  motoList.stream().filter(a -> a.getChofer().equals(chofer1)).collect(Collectors.toList());
+
+        return motoList1;
+    }
+
+    @Override
+    public List<Moto> getMotoByIdParadero(Paradero paradero) {
+        Optional<Paradero> paradero1 = paraderoRepository.findById(paradero.getParadero_id());
+        List<Moto> motoList = motoRepository.findAll();
+        //Moto moto = motoList.stream().filter(a -> a.getParadero().equals(paradero1)).findFirst().orElse(null);
+        List<Moto> motoList1 =  motoList.stream().filter(a -> a.getChofer().equals(paradero1)).collect(Collectors.toList());
 
         return motoList1;
     }

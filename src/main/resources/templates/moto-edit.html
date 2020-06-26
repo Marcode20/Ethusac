@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form action="#" method="post"
+      th:object="${moto}"
+      th:action="@{/moto/update/{id} (id = ${moto.moto_id})}">
+
+    <table>
+        <tr>
+            <td>placa:</td>
+            <td><input type="text" th:field="*{placa}"></td>
+        </tr>
+        <tr>
+            <td>chasis:</td>
+            <td><input type="text" th:field="*{chasis}"></td>
+        </tr>
+        <tr>
+            <td>color:</td>
+            <td><input type="text" th:field="*{color}"></td>
+        </tr>
+
+        <tr>
+            <td>marca:</td>
+            <td><input type="text" th:field="*{marca}"></td>
+        </tr>
+        <tr>
+            <td>soat:</td>
+            <td><input type="text" th:field="*{soat}"></td>
+        </tr>
+        <tr class="pt-2">
+            <td>
+                <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Grabar</button>
+            </td>
+        </tr>
+
+    </table>
+
+</form>
+</body>
+</html>

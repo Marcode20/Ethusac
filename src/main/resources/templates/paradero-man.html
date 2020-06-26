@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" th:href="@{css/mantenimiento.css}">
-    <title>mantenimiento moto</title>
+    <title>mantenimiento paradero</title>
 </head>
 <body style="background-color: beige;">
 <!--header-->
@@ -49,7 +49,7 @@
             </div>
             <div class="col-11">
                 <div id="menu" class="col-12 col-lg">
-                    <h2 id="titulo"  class="text-center text-primary">Mantenimiento de Motos</h2>
+                    <h2 id="titulo"  class="text-center text-primary">Mantenimiento de paradero</h2>
                     <hr>
                     <div class="row tex-center" id="icon">
 
@@ -58,27 +58,26 @@
                         <table class="table" id="tmante">
                             <thead class="thead-dark">
                             <tr>
-                                <th scope="col">moto_id</th>
-                                <th scope="col">placa</th>
-                                <th scope="col">chasis</th>
-                                <th scope="col">color</th>
-                                <th scope="col">marca</th>
-                                <th scope="col">soat</th>
+                                <th scope="col">paradero_id</th>
+                                <th scope="col">nombreParadero</th>
+                                <th scope="col">capacidadMotos</th>
+                                <th scope="col">direccion</th>
+                                <th scope="col">distrito</th>
                                 <th scope="col">Editar</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="moto : ${motolist}">
-                                <th  th:text="${moto.moto_id}"></th>
-                                <th  th:text="${moto.placa}"></th>
-                                <td th:text="${moto.chasis}"></td>
-                                <td th:text="${moto.color}"></td>
-                                <td th:text="${moto.marca}"></td>
-                                <td th:text="${moto.soat}"></td>
+                            <tr th:each="parad : ${paradero}">
+                                <th  th:text="${parad.paradero_id}"></th>
+                                <th  th:text="${parad.nombreParadero}"></th>
+                                <th  th:text="${parad.capacidadMotos}"></th>
+                                <td th:text="${parad.direccion}"></td>
+                                <td th:text="${parad.distrito}"></td>
                                 <td>
                                     <di>
-                                        <a th:href="@{/moto/edit/{id} (id = ${moto.moto_id})}">Editar</a>
-                                        <a th:href="@{/moto/delete/{id} (id = ${moto.moto_id})}">Eliminar</a>
+                                        <a th:href="@{/paradero/edit/{id} (id = ${parad.paradero_id})}">Editar</a>
+                                        <a th:href="@{/paradero/delete/{id} (id = ${parad.paradero_id})}">Eliminar</a>
+                                        <a th:href="@{/paradero/{id}/motos  (id = ${parad.paradero_id})}">Moto</a>
                                     </di>
                                 </td>
                             </tr>
@@ -104,7 +103,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Insertar Moto</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Insertar Chofer</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -112,30 +111,26 @@
             <div class="modal-body">
 
                 <form action="#" method="post"
-                      th:object="${moto1}"
-                      th:action="@{/moto/save} ">
+                      th:object="${paradero1}"
+                      th:action="@{/paradero/save}">
 
                     <table>
                         <tr>
-                            <td>placa:</td>
-                            <td><input type="text" th:field="*{placa}"></td>
+                            <td>nombre Paradero:</td>
+                            <td><input type="text" th:field="*{nombreParadero}"></td>
                         </tr>
                         <tr>
-                            <td>chasis:</td>
-                            <td><input type="text" th:field="*{chasis}"></td>
+                            <td>capacidadMotos:</td>
+                            <td><input type="number" th:field="*{capacidadMotos}"></td>
                         </tr>
                         <tr>
-                            <td>color:</td>
-                            <td><input type="text" th:field="*{color}"></td>
+                            <td>direccion:</td>
+                            <td><input type="text" th:field="*{direccion}"></td>
                         </tr>
 
                         <tr>
-                            <td>marca:</td>
-                            <td><input type="text" th:field="*{marca}"></td>
-                        </tr>
-                        <tr>
-                            <td>soat:</td>
-                            <td><input type="text" th:field="*{soat}"></td>
+                            <td>distrito:</td>
+                            <td><input type="text" th:field="*{distrito}"></td>
                         </tr>
                         <tr class="pt-2">
                             <td>

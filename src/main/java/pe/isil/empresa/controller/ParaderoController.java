@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import pe.isil.empresa.model.Chofer;
+import pe.isil.empresa.model.Moto;
 import pe.isil.empresa.model.Paradero;
+import pe.isil.empresa.service.MotoServiceImpl;
 import pe.isil.empresa.service.ParaderoService;
 import pe.isil.empresa.service.ParaderoServiceImpl;
 
@@ -19,10 +21,14 @@ public class ParaderoController {
     @Autowired
     private ParaderoServiceImpl paraderoServiceImpl ;
 
+    @Autowired
+    private MotoServiceImpl motoServiceImpl;
+
     @GetMapping("/paradero")
     public String getAllParadero(Model model){
         model.addAttribute("paradero", paraderoServiceImpl.getAllParadero());
-        return "paradero";
+        model.addAttribute("paradero1", new Paradero());
+        return "paradero-man";
     }
     @GetMapping("/paradero/add")
     public String paraderoAdd(Model model){
@@ -43,6 +49,7 @@ public class ParaderoController {
 
     @PostMapping("/paradero/update/{id}")
     public String updateParadero(@PathVariable Integer id, Paradero paradero){
+        paradero.setParadero_id(id);
         paraderoServiceImpl.updateParadero(paradero);
         return "redirect:/paradero";
     }
@@ -51,4 +58,16 @@ public class ParaderoController {
         this.paraderoServiceImpl.deleteParadero(id);
         return "redirect:/paradero";
     }
+
+    @GetMapping("/paradero/{id}/motos")
+    public String motoList(Model model, @PathVariable Integer id){
+        model.addAttribute("id",id);
+        Paradero current = paraderoServiceImpl.getParaderoById(id);
+        model.addAttribute("motolist",motoServiceImpl.getMotoByIdParadero(current));
+        //model.addAttribute("motolist",motoServiceImpl.getAllMoto());
+        model.addAttribute("moto1",new Moto());
+        return "motos";
+    }
+
+
 }

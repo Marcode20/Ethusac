@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import pe.isil.empresa.model.Chofer;
 import pe.isil.empresa.model.Moto;
+import pe.isil.empresa.model.Paradero;
 import pe.isil.empresa.service.ChoferServiceImpl;
 import pe.isil.empresa.service.MotoService;
 import pe.isil.empresa.service.MotoServiceImpl;
@@ -34,7 +35,10 @@ public class MotoController {
 
     @PostMapping("/moto/update/{id}")
     public String updateMoto(@PathVariable Integer id, Moto moto){
+        System.out.println(moto);
+        moto.setMoto_id(id);
         motoServiceImpl.updateMoto(moto);
+
         return "redirect:/motos";
     }
 
@@ -43,10 +47,23 @@ public class MotoController {
         this.motoServiceImpl.deleteMotor(id);
         return "redirect:/motos";
     }
-//    @PostMapping("/moto/save")
-//    public String motoSave(Moto moto){
-//        motoServiceImpl.createMoto(moto);
-//        return "redirect:/motos";
-//    }
+
+    @GetMapping("/motos")
+    public String getAllMoto(Model model){
+        model.addAttribute("motolist", motoServiceImpl.getAllMoto());
+        model.addAttribute("moto1", new Moto());
+        return "motos";
+    }
+    @GetMapping("/moto/add")
+    public String motoAdd(Model model){
+        model.addAttribute("moto", new Moto());
+        return "moto-add";
+    }
+    @PostMapping("/moto/save")
+    public String motoSave(Moto moto){
+        motoServiceImpl.createMoto(moto);
+        return "redirect:/motos";
+    }
+
 }
 

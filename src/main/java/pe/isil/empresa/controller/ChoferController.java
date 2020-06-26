@@ -11,6 +11,7 @@ import pe.isil.empresa.model.Moto;
 import pe.isil.empresa.service.ChoferService;
 import pe.isil.empresa.service.ChoferServiceImpl;
 import pe.isil.empresa.service.MotoService;
+import pe.isil.empresa.service.MotoServiceImpl;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,7 +24,7 @@ public class ChoferController {
     private ChoferServiceImpl choferServiceImpl;
 
     @Autowired
-    private MotoService motoService;
+    private MotoServiceImpl motoServiceImpl;
 
     @GetMapping("/chofer")
     public String getAllChofer(Model model){
@@ -64,9 +65,9 @@ public class ChoferController {
     public String motoList(Model model, @PathVariable Integer id){
         model.addAttribute("id",id);
         Chofer current = choferServiceImpl.getChoferById(id);
-        model.addAttribute("motos",motoService.getMotoByIdChofer(current));
-        model.addAttribute("motolist",motoService.getAllMoto());
-        model.addAttribute("moto",new Moto());
+        model.addAttribute("motolist",motoServiceImpl.getMotoByIdChofer(current));
+        //model.addAttribute("motolist",motoServiceImpl.getAllMoto());
+        model.addAttribute("moto1",new Moto());
         return "motos";
     }
 
@@ -85,7 +86,7 @@ public class ChoferController {
         listchofer.add(currentChofer);
         if(currentChofer != null){
             moto.setChofer(listchofer);
-            motoService.createMoto(moto);
+            motoServiceImpl.createMoto(moto);
         }
         return "redirect:/chofer/"+id+"/motos";
     }
